@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequently Asked Questions</title>
+  <%- include("partials/_seo"); -%>
+  <script defer src="../JS/index.js"></script>
+  <script defer src="../JS/faq.js"></script>
+</head>
+
+<body class="text-xs md:text-sm xl:text-base">
+  <!-- Nav Bar -->
+  <%- include("partials/_nav"); -%>
+  <%- include ("partials/_secondHero.ejs", { imageUrl: '/Images/faqPage.jpg', heading: 'FAQs', subtext: 'Home'}); -%>
+  <section class="mx-auto container">
+    <div class="flex flex-col gap-y-10 px-4 sm:px-8 md:px-12 lg:px-16 2xl:px-24 xl:px-20 py-20">
+      <div class="flex md:flex-row flex-col md:justify-between gap-y-5">
+        <div class="w-full md:w-[40%] xl:w-[30%]">
+          <div class="inline-flex items-center bg-gradient-to-r from-yellow-100 to-yellow-50 shadow-sm mb-8 px-6 py-3 border border-yellow-200 rounded-full">
+            <span class="font-semibold text-[10px] text-slate-800 md:text-xs xl:text-sm">Comprehensive Answers</span>
+          </div>
+          <div class="flex flex-col gap-y-3">
+            <p class="font-bold text-lg sm:text-xl md:text-2xl xl:text-3xl">General FAQs</p>
+            <p class="text-black/70">General Frequently Asked Questions: Insights and Clarifications</p>
+          </div>
+        </div>
+        <div class="flex flex-col w-full md:w-[55%] xl:w-[68%]">
+          <button class="collapsible">
+            What is Pinnacle Asset?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              Pinnacle Asset is described as an industrialized independent group of companies that have consolidated to pursue collective wealth development and enhance financial stability for its members. The organization asserts its establishment as a legal investment and financial entity following the 2007/2008 global economic downturn.
+            </p>
+          </div>
+          <button class="collapsible">
+            What types of assets does Pinnacle Asset manage?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              Currently, Pinnacle Asset's asset management portfolio is not explicitly defined within the provided documentation. For detailed information, please contact our member support
+            </p>
+          </div>
+          <button class="collapsible">
+            How does Pinnacle Asset ensure the security of member investments?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              Pinnacle Asset operates as a legal investment and financial body. Further details regarding specific security protocols and risk management strategies can be obtained by contacting our member support.
+            </p>
+          </div>
+          <button class="collapsible">
+            How do I initiate an investment with Pinnacle Asset?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              The process for initiating an investment with Pinnacle Asset requires direct communication with our member support team. Please contact us for personalized guidance.
+            </p>
+          </div>
+          <button class="collapsible">
+            Are there any fees associated with withdrawals?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              Information regarding withdrawal fees is not currently specified. Please contact member support for complete fee schedules.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="flex md:flex-row flex-col md:justify-between gap-y-5">
+        <div class="w-full md:w-[40%] xl:w-[30%]">
+          <div class="flex flex-col gap-y-3">
+            <p class="font-bold text-darkNavy text-lg sm:text-xl md:text-2xl xl:text-3xl">Partnership FAQs</p>
+            <p class="text-black/70">Partnership Frequently Asked Questions: Insights and Clarifications</p>
+          </div>
+        </div>
+        <div class="flex flex-col w-full md:w-[55%] xl:w-[68%]">
+          <button class="collapsible">
+            What is the procedure for withdrawing earnings from Pinnacle Asset?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              Detailed procedures for withdrawing earnings are available when you create your account, or you can go through direct consultation with our member support team.
+            </p>
+          </div>
+          <button class="collapsible">
+            What is the minimum membership activation amount?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              The minimum membership activation amount is not explicitly stated. Please contact member support for current activation requirements.
+            </p>
+          </div>
+          <button class="collapsible">
+            Can I participate in multiple investment packages with Pinnacle Asset?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              Information regarding multiple investment package participation is not detailed in the provided documentation. Please contact member support for clarification.
+            </p>
+          </div>
+          <button class="collapsible">
+            How does Pinnacle Asset protect my personal data?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              Pinnacle Asset adheres to data protection protocols. For detailed information regarding our privacy policies, please contact our member support.
+            </p>
+          </div>
+          <button class="collapsible">
+            How does Pinnacle Asset generate profits for its members?
+          </button>
+          <div class="content">
+            <p class="my-4">
+              Pinnacle Asset's profit generation model involves the distribution and growth of wealth. Specific details regarding investment strategies are available upon request through member support.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include("partials/faqs/_educational"); -%>
+  <%- include("partials/_footer"); -%>
+</body>
+
+</html>

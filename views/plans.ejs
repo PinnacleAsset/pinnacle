@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plans</title>
+  <%- include("partials/_seo"); -%>
+</head>
+<body class="bg-offWhite text-xs md:text-sm xl:text-base main">
+    <%- include("partials/_header", { userName: user.fullName }); -%>
+    <%- include("partials/_userSidebar", { page: currentPage }); -%>
+
+  <p class="m-4 font-bold text-lightBlack text-lg md:text-xl lg:text-2xl xl:text-3xl">Our Membership Plans</p>
+
+  <!-- Container -->
+  <div class="p-4">
+
+    <p class="font-bold text-lightBlack text-sm md:text-base xl:text-lg">View our plans</p>
+      <p class="text-darkGreen">Choose the one tailored best to your current financial need.</p>
+
+    <!-- Cards Grid -->
+    <div class="gap-10 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 xl:grid-cols-3 mt-10">
+        
+        <!-- Basic Plan -->
+        <div class="bg-white shadow-md p-6 border border-gray-200 rounded-lg w-full max-w-sm">
+            <div class="flex justify-center items-start bg-offWhite my-4 rounded-lg size-9">
+                <i class="m-auto text-green-500 text-2xl ph-fill ph-user-circle"></i>
+            </div>
+          <h3 class="font-semibold text-gray-800 text-xl">Basic Plan</h3>
+          <p class="mt-2 text-gray-600">For new investors</p>
+          <div class="mt-4 font-bold text-primaryGreen text-2xl">$200 - $10,000</div>
+          <p class="mt-1 text-gray-600">2.5% profit every day for 7 days</p>
+          <ul class="space-y-2 mt-4 text-gray-600">
+            <li class="flex items-center">
+              <i class="mr-2 text-yellow-500 ph-check-circle ph-duotone"></i> Ideal for beginners
+            </li>
+            <li class="flex items-center">
+              <i class="mr-2 text-yellow-500 ph-check-circle ph-duotone"></i> Secure transactions
+            </li>
+          </ul>
+          <a href="/user/invest" class="block bg-yellow-500 hover:bg-accentGreen mt-6 py-3 rounded-lg text-white hover:text-lightBlack text-center duration-300">
+            Invest in Basic
+          </a>
+        </div>
+      
+        <!-- Premium Plan -->
+        <div class="bg-white shadow-md p-6 border border-gray-200 rounded-lg w-full max-w-sm">
+            <div class="flex justify-center items-start bg-offWhite my-4 rounded-lg size-9">
+                <i class="m-auto text-purple-500 text-2xl ph-fill ph-trophy"></i>
+            </div>
+          <h3 class="font-semibold text-gray-800 text-xl">Premium Plan</h3>
+          <p class="mt-2 text-gray-600">For experienced investors</p>
+          <div class="mt-4 font-bold text-primaryGreen text-2xl">$10,000 - $50,000</div>
+          <p class="mt-1 text-gray-600">5% profit every day for 7 days</p>
+          <ul class="space-y-2 mt-4 text-gray-600">
+            <li class="flex items-center">
+              <i class="mr-2 text-yellow-500 ph-check-circle ph-duotone"></i> Ideal for beginners
+            </li>
+            <li class="flex items-center">
+              <i class="mr-2 text-yellow-500 ph-check-circle ph-duotone"></i> Secure transactions
+            </li>
+          </ul>
+          <a href="/user/invest" class="block bg-yellow-500 hover:bg-accentGreen mt-6 py-3 rounded-lg text-white hover:text-lightBlack text-center duration-300">
+            Invest in Premium Plan
+          </a>
+        </div>
+      
+        <!-- Conferential Plan -->
+        <div class="relative bg-white shadow-md p-6 border border-gray-200 rounded-lg w-full max-w-sm">
+            <div class="top-0 right-6 absolute bg-accentGreen px-2 py-1 rounded-b-xl text-white">
+                MOST POPULAR
+            </div>
+            <div class="flex justify-center items-start bg-offWhite my-4 rounded-lg size-9">
+                <i class="m-auto text-yellow-500 text-2xl ph-fill ph-fire"></i>
+            </div>
+          <h3 class="font-semibold text-gray-800 text-xl">Conferential Plan</h3>
+          <p class="mt-2 text-gray-600">For serious investors</p>
+          <div class="mt-4 font-bold text-primaryGreen text-2xl">$50,000 - $100,000</div>
+          <p class="mt-1 text-gray-600">7% profit every day for 7 days</p>
+          <ul class="space-y-2 mt-4 text-gray-600">
+            <li class="flex items-center">
+              <i class="mr-2 text-yellow-500 ph-check-circle ph-duotone"></i> Exclusive benefits
+            </li>
+            <li class="flex items-center">
+              <i class="mr-2 text-yellow-500 ph-check-circle ph-duotone"></i> Premium security
+            </li>
+          </ul>
+          <a href="/user/invest" class="block bg-yellow-500 hover:bg-accentGreen mt-6 py-3 rounded-lg text-white hover:text-lightBlack text-center duration-300">
+            Invest in Conferential Plan
+          </a>
+        </div>
+      
+        <!-- Zone leader Plan -->
+        <div class="bg-white shadow-md p-6 border border-gray-200 rounded-lg w-full max-w-sm">
+            <div class="flex justify-center items-start bg-offWhite my-4 rounded-lg size-9">
+                <i class="m-auto text-red-500 text-2xl ph-fill ph-lightning"></i>
+            </div>
+          <h3 class="font-semibold text-gray-800 text-xl">Zone Leader Plan</h3>
+          <p class="mt-2 text-gray-600">Unlimited investments</p>
+          <div class="mt-4 font-bold text-primaryGreen text-2xl">$100,000 - Unlimited</div>
+          <p class="mt-1 text-gray-600">10% profit every day for 7 days</p>
+          <ul class="space-y-2 mt-4 text-gray-600">
+            <li class="flex items-center">
+              <i class="mr-2 text-yellow-500 ph-check-circle ph-duotone"></i> Advanced opportunities
+            </li>
+            <li class="flex items-center">
+              <i class="mr-2 text-yellow-500 ph-check-circle ph-duotone"></i> Dedicated support
+            </li>
+          </ul>
+          <a href="/user/invest" class="block bg-yellow-500 hover:bg-accentGreen mt-6 py-3 rounded-lg text-white hover:text-lightBlack text-center duration-300">
+            Invest in Zone Leader Plan
+          </a>
+        </div>
+      </div>
+      
+  </div>
+
+</body>
+</html>

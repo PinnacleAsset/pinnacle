@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment</title>
+  <%- include("partials/_seo"); -%>
+  <script defer src="../JS/auth.js"></script>
+</head>
+
+<body class="bg-offWhite text-xs md:text-sm xl:text-base main">
+  <%- include("partials/_header", { userName: user.fullName }); -%>
+  <%- include("partials/_userSidebar", { page: currentPage }); -%>
+  <%- include('partials/_alert') %>
+  <section class="flex flex-row justify-between items-center m-4">
+    <p class="font-bold text-lightBlack text-lg md:text-xl lg:text-2xl xl:text-3xl">Investment</p>
+    <div>
+      <p class="text-gray-700">Your Balance</p>
+      <h2 class="font-bold text-primaryGreen text-lg md:text-xl lg:text-2xl xl:text-3xl text-center">$<%= userBalance %></h2>
+    </div>
+  </section>
+  <section class="p-4">
+    <div class="bg-white mt-4 p-4 border border-[#767680] border-opacity-10 rounded-2xl">
+      <p class="font-bold text-lightBlack text-sm md:text-base xl:text-lg">Grow your Portfolio</p>
+      <p class="text-darkGreen">Start a new investment.</p>
+
+      <form id="myForm" action="/user/invest" method="POST" class="mt-10 w-full text-left">
+        <label for="investmentPlan" class="block font-medium text-gray-700">Choose an Investment Plan:</label>
+        <select name="investmentPlan" id="investmentPlan" class="mt-1 mb-4 px-4 pr-10 border focus:border-primaryGreen border-black/10 rounded-md focus:outline-none w-full h-11 cursor-pointer">
+          <option value="">Select Your Desired Plan</option>
+          <option value="standard">Standard Plan ($200 - $50,000 5% profit for 5 days)</option>
+          <option value="executive">Executive Plan ($10,000 - $100,000, 7% profit for 20 days)</option>
+        </select>
+        <%- include('partials/_input.ejs', { type:'number', id: 'amount', name: 'amount', label: 'Investment Amount', placeholder: 'Enter Investment amount', required: true }) %>
+        <div id="errorMessage" class="hidden mt-2 text-red-500"></div>
+        <%- include('partials/_button.ejs', { type: 'submit', label: 'Start Investment', icon: '🌱', disabled: false }) %>
+      </form>
+    </div>
+    <div class="bg-white mt-6 p-4 border border-[#767680] border-opacity-10 rounded-2xl">
+      <h2 class="mb-4 font-bold text-lightBlack text-sm md:text-base xl:text-lg">Running Investments</h2>
+      <div class="h-80 overflow-y-auto">
+        <% if (investments.length === 0) { %>
+        <section class="flex sm:flex-row flex-col justify-between gap-y-5 sm:gap-y-0 shadow-md mb-4 p-4 rounded-lg">
+          <div>
+            <h2 class="mb-2 font-bold text-primaryGreen text-sm md:text-base xl:text-lg">No Running Investments</h2>
+            <p class="text-gray-700">You currently have no active investments.</p>
+          </div>
+          <div>
+            <p class="mb-2 text-gray-700">Total Investments.</p>
+            <h2 class="font-bold text-primaryGreen text-sm md:text-base xl:text-lg sm:text-center"><%= totalInvestments %></h2>
+          </div>
+        </section>
+        <% } %>
+        <% investments.forEach(investment => { %>
+        <div class="bg-primaryGreen/10 shadow-lg mb-4 p-4 border border-gray-200 rounded-lg">
+          <!-- Plan Details -->
+          <div class="gap-4 grid grid-cols-2 text-gray-700">
+            <div>
+              <p class="flex items-center font-medium text-sm md:text-base xl:text-lg">
+                <i class="ph-fill ph-rocket-launch text-primaryGreen"></i> Plan:
+              </p>
+              <p class="capitalize"><%= investment.plan %> Plan</p>
+            </div>
+            <div>
+              <p class="flex items-center font-medium text-sm md:text-base xl:text-lg">
+                <i class="ph-calendar ph-fill text-primaryGreen"></i> Start Date:
+              </p>
+              <p>
+                <%= new Date(investment.startDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  }) %>
+              </p>
+            </div>
+            <div>
+              <p class="flex items-center font-medium text-sm md:text-base xl:text-lg">
+                <i class="ph-calendar-check ph-fill text-primaryGreen"></i>End Date:
+              </p>
+              <p>
+                <%= new Date(investment.endDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  }) %>
+              </p>
+            </div>
+            <div>
+              <p class="flex items-center font-medium text-sm md:text-base xl:text-lg">
+                <i class="ph-currency-dollar ph-fill text-primaryGreen"></i> Amount:
+              </p>
+              <p>$<%= investment.amount.toFixed(2) %></p>
+            </div>
+            <div>
+              <p class="flex items-center font-medium text-sm md:text-base xl:text-lg">
+                <i class="ph-fill ph-seal-percent text-primaryGreen"></i> Daily Percent:
+              </p>
+              <p><%= investment.dailyPercent %>%</p>
+            </div>
+            <div>
+              <p class="flex items-center font-medium text-sm md:text-base xl:text-lg">
+                <i class="ph-fill ph-money-wavy text-primaryGreen"></i> Payout:
+              </p>
+              <p>
+                $<%= investment.payoutAmount.toFixed(2) %>
+                <span class="text-gray-500">(on completion)</span>
+              </p>
+            </div>
+          </div>
+          <!-- Footer -->
+          <div class="mt-6">
+            <p class="flex items-center text-gray-500 text-md">
+              <i class="text-primaryGreen fa-info-circle fas"></i>
+              Your investment is actively RUNNING. Check back after the end date for updates.
+            </p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+  <script>
+    document.getElementById('myForm').addEventListener('submit', function(e) {
+      const investmentPlan = document.getElementById('investmentPlan').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const errorMessage = document.getElementById('errorMessage');
+
+      // Define the plan limits
+      const plans = {
+        standard: {
+          min: 200,
+          max: 50000
+        },
+        executive: {
+          min: 10000,
+          max: 100000
+        }
+      };
+
+      // Validate amount
+      const {
+        min,
+        max
+      } = plans[investmentPlan];
+      if (amount < min || amount > max) {
+        e.preventDefault(); // Prevent form submission
+        errorMessage.textContent = `The amount must be between $${min.toLocaleString()} and $${max.toLocaleString()} for the ${investmentPlan.charAt(0).toUpperCase() + investmentPlan.slice(1)} Plan.`;
+        errorMessage.classList.remove('hidden');
+        setTimeout(() => location.reload(), 3000);
+      } else {
+        errorMessage.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+
+</html>
