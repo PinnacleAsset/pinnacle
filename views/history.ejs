@@ -20,7 +20,7 @@
   </section>
   <section class="p-4">
     <p class="font-bold text-lightBlack text-sm md:text-base xl:text-lg">All Transactions</p>
-      <p class="text-darkGreen">View all the transactions made on your account.</p>
+    <p class="text-darkGreen">View all the transactions made on your account.</p>
     <div class="bg-white mt-4 p-4 border border-[#767680] border-opacity-10 rounded-2xl min-h-[80%] overflow-y-auto">
       <% if (transactions.length === 0) { %>
       <p class="text-red-600 text-sm md:text-base">No Transactions Found.</p>
@@ -54,7 +54,7 @@
                          "/Images/earn.svg",
                 iconAlt: transactionTypeName + " Icon",
                 textColor: "text-[#141619]",
-                description: `${transactionTypeName} via ${transactionType ==="investment" ? transaction.plan + " Plan" : transaction.coin || 'Commission'}`,
+                description: `${transactionTypeName} ${transactionType ==="investment" ? "via " + transaction.plan + " Plan" : "via " + transaction.coin}`,
                 amountColor: transactionType === "deposit" || transactionType === "earning" || transactionType === "bonus" ? "text-[#20BF55]" : "text-[#FF5964]",
                 amountSign: transactionType === "deposit" || transactionType === "earning" || transactionType === "bonus" ? "+" : "-",
                 amount: transaction.amount,

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Alert</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .header {
+      text-align: center;
+    }
+
+    .logo {
+      width: 40px;
+      margin-bottom: 20px;
+    }
+
+    .greeting {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #eab308;
+      text-align: left;
+    }
+
+    .message {
+      font-size: 1rem;
+      color: #333333;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    .info-box {
+      background-color: #f1f1f1;
+      padding: 16px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+
+    .info-box p {
+      margin: 6px 0;
+      color: #111;
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      background-color: #eab308;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      margin-top: 40px;
+    }
+
+    .footer a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <img class="logo" src="https://res.cloudinary.com/dpmx02shl/image/upload/v1751630435/pinnacle.jpg" alt="Pinnacle Asset Logo" />
+      <h4 class="greeting">Hello <%= name %>,</h4>
+    </div>
+
+    <div class="message">
+      <p>We noticed a login to your Pinnacle Asset account with the following details:</p>
+
+      <div class="info-box">
+        <p><strong>IP Address:</strong> <%= ip %></p>
+        <p><strong>Location:</strong> <%= location.city %>, <%= location.region %>, <%= location.country %></p>
+        <p><strong>Device:</strong> <%= userAgent %></p>
+        <p><strong>Date & Time:</strong> <%= date %></p>
+      </div>
+
+      <p>If this was you, no further action is needed.</p>
+      <p>If not, please secure your account immediately by resetting your password, or contact support at <a href="mailto:support@pinnacleasset.com">support@pinnacleasset.com</a>.</p>
+    </div>
+
+    <div class="footer">
+      <p><strong>Pinnacle Asset</strong> — Your trusted crypto partner</p>
+      <p>&copy; <%= year %> Pinnacle Asset. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+
+</html>

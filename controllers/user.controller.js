@@ -16,7 +16,10 @@ import userWalletServices from "../services/wallet.services.js";
 //Utils
 import { Email } from "../utils/mail.util.js";
 import { sendEmail } from "../utils/adminMail.util.js";
-import { calculateUserBalance, calculateReferralBalance } from "../utils/calculateBalance.js";
+import {
+  calculateUserBalance,
+  calculateReferralBalance,
+} from "../utils/calculateBalance.js";
 import {
   getCryptoAddress,
   getWithdrawalWallet,
@@ -163,6 +166,15 @@ class UserController {
       // Client Notification
       new Email(userDetails, data.amount).sendDeposit();
 
+      //Joint account notification
+      if (userDetails.email === "qais.sarmadd58@gmail.com") {
+        const user = {
+          email: "sarmadphd@gmail.com",
+          fullName: userDetails.fullName,
+        };
+        new Email(user, data.amount).sendDeposit();
+      }
+
       //Admin Notification
       const subject = "New Deposit Notification";
       const text = `The client ${userDetails.fullName} and email ${userDetails.email} just deposited $${data.amount} in your website, kindly log in to confirm.`;
@@ -222,7 +234,12 @@ class UserController {
       basic: { min: 200, max: 10000, dailyPercent: 2.5, duration: 7 },
       premium: { min: 10000, max: 50000, dailyPercent: 5, duration: 7 },
       conferential: { min: 50000, max: 100000, dailyPercent: 7, duration: 7 },
-      "zone leader": { min: 100000, max: 10000000000, dailyPercent: 10, duration: 7 },
+      "zone leader": {
+        min: 100000,
+        max: 10000000000,
+        dailyPercent: 10,
+        duration: 7,
+      },
     };
 
     try {
@@ -284,6 +301,15 @@ class UserController {
 
       //Client Notification
       new Email(userDetails, data.amount, data.plan).sendInvestment();
+
+      //Joint account notification
+      if (userDetails.email === "qais.sarmadd58@gmail.com") {
+        const user = {
+          email: "sarmadphd@gmail.com",
+          fullName: userDetails.fullName,
+        };
+        new Email(user, data.amount, data.plan).sendInvestment();
+      }
 
       //Admin Notification
       const subject = "New Investment Notification";
@@ -374,6 +400,15 @@ class UserController {
 
       //Client Notification
       new Email(userDetails, data.amount).sendWithdrawal();
+
+      //Joint account notification
+      if (user.email === "qais.sarmadd58@gmail.com") {
+        const user = {
+          email: "sarmadphd@gmail.com",
+          fullName: user.fullName,
+        };
+        new Email(user, data.amount).sendWithdrawal();
+      }
 
       //Admin Notification
       const subject = "New Withdrawal Notification";
@@ -482,7 +517,7 @@ class UserController {
   async renderReferral(req, res) {
     const userId = res.locals.user.id;
     const user = res.locals.userDetails;
-    const referralBalance = calculateReferralBalance(user)
+    const referralBalance = calculateReferralBalance(user);
     const userDetails = await userServices.fetchUserById(userId);
     const referrals = await referralServices.fetchReferrals(userId);
 
@@ -548,9 +583,8 @@ class UserController {
         getWithdrawalWallet(coin) === "trc20"
           ? walletAddress
           : userWallets.trc20,
-      sol: getWithdrawalWallet(coin) === "sol"
-            ? walletAddress
-            : userWallets.sol
+      sol:
+        getWithdrawalWallet(coin) === "sol" ? walletAddress : userWallets.sol,
     };
 
     try {

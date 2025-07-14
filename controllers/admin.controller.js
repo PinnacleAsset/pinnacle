@@ -74,22 +74,51 @@ class AdminController {
           userEmail
         );
         if (isUserReferred) {
-          const referredBonus = amount * 0.05
+          const referredBonus = amount * 0.05;
           const data = {
             amount: parseFloat(referredBonus),
             description: "Referral Reward",
             userId: isUserReferred.referralUserId,
           };
           await earningServices.newEarning(data);
-          const user = await userServices.fetchUserById(isUserReferred.referralUserId)
+          const user = await userServices.fetchUserById(
+            isUserReferred.referralUserId
+          );
           //Notify the third party
           new Email(user, referredBonus).sendCommission();
+          //Joint account notification
+          if (user.email === "qais.sarmadd58@gmail.com") {
+            const user = {
+              email: "sarmadphd@gmail.com",
+              fullName: user.fullName,
+            };
+            new Email(user, referredBonus).sendCommission();
+          }
         }
       }
       //Clients Notification
-      status === "successful"
-        ? new Email(user, amount).sendDepositFinal()
-        : new Email(user, amount).sendDepositRejected();
+      if (status === "successful") {
+        new Email(user, amount).sendDepositFinal();
+        //Joint account notification
+        if (user.email === "qais.sarmadd58@gmail.com") {
+          const user = {
+            email: "sarmadphd@gmail.com",
+            fullName: user.fullName,
+          };
+          new Email(user, amount).sendDepositFinal();
+        }
+      } else {
+        new Email(user, amount).sendDepositRejected();
+        //Joint account notification
+        if (user.email === "qais.sarmadd58@gmail.com") {
+          const user = {
+            email: "sarmadphd@gmail.com",
+            fullName: user.fullName,
+          };
+          new Email(user, amount).sendDepositRejected();
+        }
+      }
+
       req.flash("message", {
         success: true,
         title: `Deposit ${status === "successful" ? "Approved" : "Rejected"}`,
@@ -127,9 +156,27 @@ class AdminController {
       const user = await userServices.fetchUserByEmail(userEmail);
 
       //Clients Notification
-      status === "successful"
-        ? new Email(user, amount).sendWithdrawalFinal()
-        : new Email(user, amount).sendWithdrawalRejected();
+      if (status === "successful") {
+        new Email(user, amount).sendWithdrawalFinal();
+        //Joint account notification
+        if (user.email === "qais.sarmadd58@gmail.com") {
+          const user = {
+            email: "sarmadphd@gmail.com",
+            fullName: user.fullName,
+          };
+          new Email(user, amount).sendWithdrawalFinal();
+        }
+      } else {
+        new Email(user, amount).sendWithdrawalRejected();
+        //Joint account notification
+        if (user.email === "qais.sarmadd58@gmail.com") {
+          const user = {
+            email: "sarmadphd@gmail.com",
+            fullName: user.fullName,
+          };
+          new Email(user, amount).sendWithdrawalRejected();
+        }
+      }
       req.flash("message", {
         success: true,
         title: `Withdrawal ${
@@ -175,6 +222,16 @@ class AdminController {
 
       //Client updated
       new Email(user, amount).sendBonus();
+
+      //Joint account notification
+      if (user.email === "qais.sarmadd58@gmail.com") {
+        const user = {
+          email: "sarmadphd@gmail.com",
+          fullName: user.fullName,
+        };
+        new Email(user, amount).sendBonus();
+      }
+
       req.flash("message", {
         success: true,
         title: "Bonus Sent",
@@ -265,9 +322,28 @@ class AdminController {
       const user = await userServices.fetchUserById(userId);
 
       //Clients Notification
-      suspend === "suspend"
-        ? new Email(user).sendSuspended()
-        : new Email(user).sendUnsuspend();
+      if (suspend === "suspend") {
+        new Email(user).sendSuspended();
+
+        //Joint account notification
+        if (user.email === "qais.sarmadd58@gmail.com") {
+          const user = {
+            email: "sarmadphd@gmail.com",
+            fullName: user.fullName,
+          };
+          new Email(user).sendSuspended();
+        }
+      } else {
+        new Email(user).sendUnsuspend();
+        //Joint account notification
+        if (user.email === "qais.sarmadd58@gmail.com") {
+          const user = {
+            email: "sarmadphd@gmail.com",
+            fullName: user.fullName,
+          };
+          new Email(user).sendUnsuspend();
+        }
+      }
 
       req.flash("message", {
         success: true,

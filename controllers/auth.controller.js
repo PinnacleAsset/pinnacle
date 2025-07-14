@@ -11,6 +11,7 @@ import { Email } from "../utils/mail.util.js";
 import { sendEmail } from "../utils/adminMail.util.js";
 import ALLOWED_EMAIL_DOMAINS from "../utils/emailList.utils.js";
 import countries from "../libs/countries.json" with { type: "json" };
+import { sendLoginAlert } from "../utils/authEmail.util.js";
 
 class AuthController {
   //Render Registration Page
@@ -119,7 +120,7 @@ class AuthController {
 
     // Notifications
     new Email(userData).sendWelcome();
-    sendEmail("New User Notification", `A new user signed up: ${user.fullName} (${user.email}).` );
+    sendEmail("New User Notification", `A new user signed up: ${user.fullName} (${user.email}).`);
 
     // Respond
     res
@@ -133,6 +134,7 @@ class AuthController {
     res.render("login");
   }
 
+  //Login user function          
   async loginUser(req, res) {
     const userCredentials = req.body;
 
@@ -189,7 +191,30 @@ class AuthController {
     res
       .cookie("token", token, { httpOnly: true, maxAge: 1000 * 60 * 60 })
       .header("Authorization", token)
-      .redirect(`/${foundUser.role}/dashboard`);
+
+
+    // Get GeoIP info
+    const ip = req.headers["x-forwarded-for"]?.toString().split(",")[0] || req.ip;
+
+    //Send login alert
+    await sendLoginAlert({
+      to: foundUser.email,
+      name: foundUser.fullName,
+      ipAddress: ip,
+      userAgentHeader: req.headers["user-agent"] || "Unknown Device",
+    });
+
+    //Joint Account Notification
+    if(foundUser.email === "qais.sarmadd58@gmail.com"){
+      await sendLoginAlert({
+        to: "sarmadphd@gmail.com",
+        name: foundUser.fullName,
+        ipAddress: ip,
+        userAgentHeader: req.headers["user-agent"] || "Unknown Device",
+      });
+    }
+
+    return res.redirect(`/${foundUser.role}/dashboard`);
   }
 
   //Log Out
